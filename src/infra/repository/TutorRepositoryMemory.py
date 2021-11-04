@@ -12,13 +12,16 @@ class TutorRepositoryMemory(TutorRepository):
             Tutor("5678", "Maria", "maria@tutor"),
         ]
 
-    def create_tutor(self, name: str, email: str) -> None:
+    def get_all_tutors(self) -> List[Tutor]:
+        return self.__tutors
+
+    def create_tutor(self, name: str, email: str) -> Tutor:
         new_tutor = Tutor(uuid.uuid4(), name, email)
         self.__tutors.append(new_tutor)
+        return new_tutor
 
     def get_tutor_by_id(self, tutor_id: str) -> Tutor:
         tutor = [tutor for tutor in self.__tutors if tutor.id == tutor_id]
-
         if not tutor:
             raise Exception("Tutor not found")
 
